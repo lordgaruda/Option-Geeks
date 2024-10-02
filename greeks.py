@@ -85,14 +85,27 @@ def print_option_greeks(
 
 
 def main():
-    print_option_greeks(
-        underlying_price=25356,
-        strike_price=25200,
-        time_to_expiration=4,
-        volatility=12.52,
-        risk_free_interest_rate=0,
-        dividend_yield=8.89,
-    )
+    try:
+        underlying_price = float(input("Enter the underlying price: "))
+        strike_price = float(input("Enter the strike price: "))
+        time_to_expiration = float(input("Enter the time to expiration (in days): "))
+        volatility = float(input("Enter the volatility (in percentage): "))
+        risk_free_interest_rate = float(input("Enter the risk-free interest rate (in percentage): "))
+        dividend_yield = float(input("Enter the dividend yield (in percentage): "))
+
+        print_option_greeks(
+            underlying_price=underlying_price,
+            strike_price=strike_price,
+            time_to_expiration=time_to_expiration,
+            volatility=volatility,
+            risk_free_interest_rate=risk_free_interest_rate,
+            dividend_yield=dividend_yield,
+        )
+    except ValueError:
+        print("Please enter valid numerical values.")
+
+# Assuming that 'print_option_greeks' is already defined somewhere in your code
+
 
 
 if __name__ == '__main__':
