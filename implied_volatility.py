@@ -49,34 +49,43 @@ def implied_vol(opt_value, S, K, T, r, type_):
 
 
 def main():
-    nifty_19_sep_ce_price = 208
-    nifty_19_sep_pe_price = 74
+    try:
+        # Get user input
+        nifty_ce_price = float(input("Enter the Nifty CE price: "))
+        nifty_pe_price = float(input("Enter the Nifty PE price: "))
+        spot_price = float(input("Enter the spot price: "))
+        strike_price = float(input("Enter the strike price: "))
+        time_to_expire = float(input("Enter the time to expire (in days): "))
+        risk_free_rate = float(input("Enter the risk-free rate (in percentage): "))
 
-    spot_price = 25356
-    strike_price = 25200
-    time_to_expire = 4
-    risk_free_rate = 0
+        # Calculate call and put implied volatility
+        call_iv = implied_vol(
+            nifty_ce_price,
+            spot_price,
+            strike_price,
+            time_to_expire,
+            risk_free_rate,
+            'call',
+        )
 
-    call_iv = implied_vol(
-        nifty_19_sep_ce_price,
-        spot_price,
-        strike_price,
-        time_to_expire,
-        risk_free_rate,
-        'call',
-    )
+        put_iv = implied_vol(
+            nifty_pe_price,
+            spot_price,
+            strike_price,
+            time_to_expire,
+            risk_free_rate,
+            'put',
+        )
 
-    put_iv = implied_vol(
-        nifty_19_sep_ce_price,
-        spot_price,
-        strike_price,
-        time_to_expire,
-        risk_free_rate,
-        'put',
-    )
+        # Print results
+        print(f'CE IV: {call_iv}')
+        print(f'PE IV: {put_iv}')
+    
+    except ValueError:
+        print("Please enter valid numerical values.")
 
-    print(f'CE IV: {call_iv}')
-    print(f'PE IV: {put_iv}')
+# Assuming 'implied_vol' is already defined somewhere in your code
+
 
 
 if __name__ == '__main__':
